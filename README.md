@@ -10,4 +10,3 @@ Proof of concept of a live updating version Python Repl.
 
 Hooks together streamlit + jupytext + watchdog to make this work. 
 
-<img src="https://raw.githubusercontent.com/srush/streambook/main/ezgif.com-video-to-gif.gif">
