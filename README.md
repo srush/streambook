@@ -9,3 +9,5 @@ Proof of concept of a live updating version Python Repl.
 * Creates a jupyter notebook in the background
 
 Hooks together streamlit + jupytext + watchdog to make this work. 
+
+<img src="https://raw.githubusercontent.com/srush/streambook/main/ezgif.com-video-to-gif.gif">
