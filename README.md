@@ -2,7 +2,7 @@
 
 
 
-Proof of concept of a live updating version Python Repl. (inspired by https://github.com/google-research/dex-lang/) 
+Proof of concept of a live updating Python repl. (inspired by https://github.com/google-research/dex-lang/) 
 
 * Write your code in any editor
 * Watches and updates a live notebook
