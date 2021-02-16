@@ -8,8 +8,3 @@ Proof of concept of a live updating version Python Repl.
 * Watches and updates a live notebook
 * Creates a jupyter notebook in the background
 
-
-<img src="streambook.png">
-
-<img src="notebook.png">
-
