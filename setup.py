@@ -1,8 +1,9 @@
 from setuptools import setup
+from streambook.version import __version__
 
 setup(
     name="streambook",
-    version="0.1",
+    version=__version__,
     packages=[
         "streambook"
     ],
