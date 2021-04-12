@@ -1,12 +1,26 @@
 # Streambook
 
+Python notebooks without compomises. 
+
+* Write your code in any editor (emacs, vi, vscode)
+* Live updating visual output
+* Exports to standard Jupyter format. 
+* Use standard Python tools (black, lint, pytest)
+* Plays nicely with Git 
 
 
-Proof of concept of a live updating Python repl. (inspired by https://github.com/google-research/dex-lang/) 
+## Quick start
 
-* Write your code in any editor
-* Watches and updates a live notebook
-* Creates a jupyter notebook in the background
+
+> git clone https://github.com/srush/streambook; cd streambook
+> pip install .
+
+
+> python -m streambook example.py
+
+
+
+## How does this work 
 
 Hooks together streamlit + jupytext + watchdog to make this work. 
 
