@@ -24,13 +24,17 @@ Run streambook on example notebook (launches streamlit):
 python -m streambook example.py
 ```
 
-Edit your file. When you are done and ready to export to a notebook run.
+It should look like this [streambook](https://share.streamlit.io/srush/streambook/main/example.streambook.py)
+
+Edit your file. 
+
+When you are done and ready to export to a notebook run.
 
 ```bash
 jupytext --to notebook --execute example.notebook.py
 ```
 
-See the [notebook](example.notebook.ipynb) for a demo.
+See the [notebook](https://nbviewer.jupyter.org/github/srush/streambook/blob/main/example.notebook.ipynb).
 
 
 ## How does this work 
@@ -57,4 +61,4 @@ In order to circumvent this issue, the user needs to write functions and add cac
 Luckily Streamlit's caching API to makes it pretty easy in most use case. See 
 https://docs.streamlit.io/en/stable/caching.html for docs. 
 
-An example is given in the [notebook](example.notebook.py).
+An example is given in the [notebook](https://nbviewer.jupyter.org/github/srush/streambook/blob/main/example.notebook.ipynb).
