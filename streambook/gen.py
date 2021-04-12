@@ -27,7 +27,7 @@ class Generate:
         
     def markdown(self, source):
         self.all_markdown += source + "\n"
-        self.gen('st.markdown("""%s""")'%source)
+        self.gen('__st.markdown("""%s""")'%source)
 
     def code(self, source):
         wrapper = textwrap.TextWrapper(initial_indent='\t',
@@ -35,13 +35,12 @@ class Generate:
                                        width=5000)
         if not source.strip():
             return
-        self.gen("with st.echo():")
-        last = None
+        self.gen("with __st.echo():")
         for l in source.splitlines():
-            self.gen(wrapper.fill(last))
+            self.gen(wrapper.fill(l))
             
 header = """
-import streamlit as st
+import streamlit as __st
 import streambook
 __toc = streambook.TOC_Sidebar()"""
 

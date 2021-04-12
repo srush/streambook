@@ -16,7 +16,7 @@ class MyHandler(FileSystemEventHandler):
                         
 if __name__ == "__main__":
     import argparse, os
-    parser = argparse.ArgumentParser(description='Streambook options.')
+    parser = argparse.ArgumentParser(description='Stream book options.')
     parser.add_argument('file', 
                         help='file to run', type=os.path.abspath)
 
@@ -36,4 +36,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
-
