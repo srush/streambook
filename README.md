@@ -13,7 +13,7 @@ Python notebooks without compomises.
 Install:
 
 ```bash
-git clone https://github.com/srush/streambook; cd streambook```
+git clone https://github.com/srush/streambook; cd streambook
 pip install -r requirements.txt; pip install .
 ```
 
