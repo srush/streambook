@@ -45,6 +45,9 @@ Streambook is a simple script that hooks together Streamlit + Jupytext + Watchdo
 
 ## Caching
 
+![image](https://user-images.githubusercontent.com/35882/114342503-f0273d80-9b29-11eb-96d2-3fdd7938a04c.png)
+
+
 A "benefit" of using notebooks is being able to keep data cached in memory, 
 at the cost of often forgetting how it was created and in what order. 
 
