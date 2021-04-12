@@ -44,6 +44,11 @@ df.plot(ax=axs)
 fig
 
 
+x = "hello"
+# Printing
+print("Printing", x)
+"Output", x
+
 
 # ## Advanced Features
 

@@ -36,7 +36,7 @@ class Generate:
         )
         if not source.strip():
             return
-        self.gen("with __st.echo():")
+        self.gen("with __st.echo(), streambook.st_stdout('info'):")
         for l in source.splitlines():
             self.gen(wrapper.fill(l))
 

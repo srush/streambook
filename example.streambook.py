@@ -5,7 +5,7 @@ __toc = streambook.TOC_Sidebar()
 __st.markdown("""# Streambook example""")
 __st.markdown("""Streambook is a setup for writing live-updating notebooks
 in any editor that you might want to use (emacs, vi, notepad).""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	import numpy as np
 	import pandas as pd
 	import matplotlib.pyplot as plt
@@ -15,35 +15,40 @@ __st.markdown("""Notebook cells are separated by spaces. Comment cells are rende
 as markdown.
 
 See https://jupytext.readthedocs.io/en/latest/formats.html#the-light-format""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	x = np.array([10, 20, 30])
 __st.markdown("""Cells that end with an explicit variables are printed. 
 
 See https://docs.streamlit.io/en/stable/api.html#magic-commands""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	x
 __st.markdown("""Dictionaries are pretty-printed using streamlit and can be collapsed""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	data = [dict(key1 = i, key2=f"{i}", key3=100 -i) for i in range(100)]
 __st.markdown("""Pandas dataframe also show up in tables. """)
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	df = pd.DataFrame(data)
 	df
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	fig, axs = plt.subplots(figsize=(12, 4))
 	df.plot(ax=axs)
 	fig
+with __st.echo(), streambook.st_stdout('info'):
+	x = "hello"
+	# Printing
+	print("Printing", x)
+	"Output", x
 __st.markdown("""## Advanced Features""")
 __st.markdown("""By default, the notebook is rerun on save to ensure
 consistency.""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	def simple_function(x):
 	    return x + 10
 	y = simple_function(10)
 	y
 __st.markdown("""Slower functions such as functions are loading data
 can be cached during development.""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	@__st.cache()
 	def slow_function():
 	    for i in range(10):
@@ -54,7 +59,7 @@ __st.markdown("""This uses streamlit caching behind the scenes. It will
 run if the arguments or the body of the function change.""")
 __st.markdown("""See https://docs.streamlit.io/en/stable/caching.html""")
 __st.markdown("""## Longer example""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	def lorenz(x, y, z, s=10, r=28, b=2.667):
 	    """
 	    Given:
@@ -68,10 +73,10 @@ with __st.echo():
 	    y_dot = r*x - y - x*z
 	    z_dot = x*y - b*z
 	    return x_dot, y_dot, z_dot
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	dt = 0.01
 	num_steps = 20000
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	def calc_curve(dt, num_steps):
 	    # Need one more for the initial values
 	    xs = np.empty(num_steps + 1)
@@ -90,7 +95,7 @@ with __st.echo():
 	        zs[i + 1] = zs[i] + (z_dot * dt)
 	    return xs, ys, zs
 	xs, ys, zs = calc_curve(dt, num_steps)
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	# Plot file
 	fig = plt.figure(figsize=(12, 4))
 	ax = fig.add_subplot(projection='3d')
@@ -108,7 +113,7 @@ __st.markdown("""The command is:
 `jupytext --to notebook --execute example.notebook.py`""")
 __st.markdown("""Some commands are slightly different in streamlit that jupyter.
 You can include both and all `__st` lines will be stripped out.""")
-with __st.echo():
+with __st.echo(), streambook.st_stdout('info'):
 	# Jupyter command
 	from IPython.display import HTML
 	HTML('<img src="example.gif">')
