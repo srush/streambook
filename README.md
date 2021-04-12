@@ -27,7 +27,7 @@ streamlit run  --server.runOnSave true example.streambook.py
 Edit your file. When you are done and ready to export to a notebook run.
 
 ```bash
-jupytext --to notebook --execute example2.notebook.py
+jupytext --to notebook --execute example.notebook.py
 ```
 
 See the [notebook](example.notebook.ipynb) for a demo.
