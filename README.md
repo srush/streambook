@@ -1,6 +1,6 @@
 # Streambook
 
-Python notebooks without compomises. 
+Python notebooks without compromises. 
 
 <img src="output.gif">
 
