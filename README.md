@@ -42,7 +42,7 @@ This produces a standard [notebook](https://nbviewer.jupyter.org/github/srush/st
 Streambook is a simple library (< 50 lines!) that hooks together Streamlit + Jupytext + Watchdog.
 
 * [Streamlit](https://docs.streamlit.io/) - Live updating webview with an advanced caching system
-* [Jupytext](jupytext.readthedocs.io) - Bidirectional bridge between plaintext and jupyter format
+* [Jupytext](https://jupytext.readthedocs.io/) - Bidirectional bridge between plaintext and jupyter format
 * [Watchdog](https://github.com/gorakhargosh/watchdog) - File watching in python
 
 
