@@ -52,6 +52,14 @@ if __name__ == "__main__":
     observer.schedule(event_handler, path=directory, recursive=False)
     observer.start()
 
+
+    print()
+    print("Starting Streamlit")
+    import sys
+    from streamlit import cli as stcli
+    sys.argv = ["streamlit", "run", "--server.runOnSave", "true", stream_file]
+    stcli.main()
+    
     try:
         while True:
             time.sleep(1)

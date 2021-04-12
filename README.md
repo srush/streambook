@@ -13,15 +13,15 @@ Python notebooks without compromises.
 Install:
 
 ```bash
-git clone https://github.com/srush/streambook; cd streambook
+git clone https://github.com/srush/streambook
+cd streambook
 pip install -r requirements.txt; pip install .
 ```
 
-Run:
+Run streambook on example notebook (launches streamlit):
 
 ```bash
-python -m streambook example.py & 
-streamlit run  --server.runOnSave true example.streambook.py
+python -m streambook example.py
 ```
 
 Edit your file. When you are done and ready to export to a notebook run.
