@@ -1,12 +1,12 @@
 # Streambook
 
-<img src="output.gif">
-
 Python notebooks without compomises. 
 
+<img src="output.gif">
+
 * Write your code in any editor (emacs, vi, vscode)
-* Exports to standard Jupyter format. 
 * Use standard tools (git, black, lint, pytest)
+* Export to standard Jupyter format for collaboration
 
 ## Quick start
 
@@ -16,7 +16,6 @@ Install:
 git clone https://github.com/srush/streambook; cd streambook```
 pip install -r requirements.txt; pip install .
 ```
-
 
 Run:
 
@@ -35,8 +34,8 @@ See the [notebook](example.notebook.ipynb) for a demo.
 
 
 ## How does this work 
-Major Gotcha -
-Streambook is a simple script that hooks together Streamlit + Jupytext + Watchdog to make this work.
+
+Streambook is a simple script that hooks together Streamlit + Jupytext + Watchdog.
 
 * [Streamlit](https://docs.streamlit.io/) - Live updating webview with an advanced caching system
 * [Jupytext](jupytext.readthedocs.io) - Bidirectional bridge between plaintext and jupyter format
