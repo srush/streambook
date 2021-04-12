@@ -7,7 +7,7 @@ class Render(mistune.Renderer):
     def __init__(self, gen):
         super().__init__()
         self.gen = gen
-        
+
     def header(self, text, level, raw=None):
         if level == 1:
             self.gen.gen(f"__toc.title('{text}')")
@@ -16,29 +16,31 @@ class Render(mistune.Renderer):
         if level == 3:
             self.gen.gen(f"__toc.subheader('{text}')")
         return ""
-        
+
+
 class Generate:
     def __init__(self, out_stream):
         self.out_stream = out_stream
         self.all_markdown = ""
-        
+
     def gen(self, l):
         print(l, file=self.out_stream)
-        
+
     def markdown(self, source):
         self.all_markdown += source + "\n"
-        self.gen('__st.markdown("""%s""")'%source)
+        self.gen('__st.markdown("""%s""")' % source)
 
     def code(self, source):
-        wrapper = textwrap.TextWrapper(initial_indent='\t',
-                                       subsequent_indent='\t',
-                                       width=5000)
+        wrapper = textwrap.TextWrapper(
+            initial_indent="\t", subsequent_indent="\t", width=5000
+        )
         if not source.strip():
             return
         self.gen("with __st.echo():")
         for l in source.splitlines():
             self.gen(wrapper.fill(l))
-            
+
+
 header = """
 import streamlit as __st
 import streambook
@@ -47,7 +49,8 @@ __toc = streambook.TOC_Sidebar()"""
 footer = """
 __toc.generate()"""
 
-class Generator():
+
+class Generator:
     def __init__(self):
         pass
 
@@ -66,8 +69,8 @@ class Generator():
 
 if __name__ == "__main__":
     import argparse, os, sys
-    parser = argparse.ArgumentParser(description='Stream book options.')
-    parser.add_argument('file', 
-                        help='file to run', type=os.path.abspath)
+
+    parser = argparse.ArgumentParser(description="Stream book options.")
+    parser.add_argument("file", help="file to run", type=os.path.abspath)
     args = parser.parse_args()
     Generator().generate(args.file, sys.stdout)

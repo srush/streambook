@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 class Header:
     tag: str = ""
 
@@ -13,14 +14,14 @@ class Header:
 
     @property
     def anchor(self):
-        """Provide html text for anchored header. Example: 
-           <h1 id="abcdef">Abc Def</h1>
+        """Provide html text for anchored header. Example:
+        <h1 id="abcdef">Abc Def</h1>
         """
         return f"<{self.tag} id='{self.id}'>{self.text}</{self.tag}>"
 
     def toc_item(self) -> str:
         """Make markdown item for TOC listing. Example:
-           '  - <a href='#abc'>Abc</a>'
+        '  - <a href='#abc'>Abc</a>'
         """
         return f"{self.spaces}- [{self.text}](#{self.id})"
 
@@ -29,13 +30,13 @@ class Header:
         return dict(h1="", h2=" " * 2, h3=" " * 4).get(self.tag)
 
 
-
-
 class H1(Header):
     tag = "h1"
 
+
 class H2(Header):
     tag = "h2"
+
 
 class H3(Header):
     tag = "h3"
@@ -73,5 +74,3 @@ class TOC_Sidebar(TOC):
     def __init__(self):
         self._headers = []
         self._placeholder = st.sidebar.empty()
-
-
