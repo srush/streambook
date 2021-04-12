@@ -1,28 +1,25 @@
 # Streambook
 
+<img src="output.gif">
+
 Python notebooks without compomises. 
 
 * Write your code in any editor (emacs, vi, vscode)
-* Live updating visual output
 * Exports to standard Jupyter format. 
-* Use standard Python tools (black, lint, pytest)
-* Plays nicely with Git 
-
-
-<img src="output.gif">
+* Use standard tools (git, black, lint, pytest)
 
 ## Quick start
 
 Install:
 
-> git clone https://github.com/srush/streambook; cd streambook
-> pip install -r requirements.txt; pip install .
+```git clone https://github.com/srush/streambook; cd streambook```
+```pip install -r requirements.txt; pip install .```
 
 
 Run:
 
-> python -m streambook example.py & 
-> streamlit run  --server.runOnSave true example.streambook.py
+```python -m streambook example.py & ```
+```streamlit run  --server.runOnSave true example.streambook.py```
 
 Edit your file. When you are done and ready to export to a notebook run.
 
