@@ -9,6 +9,8 @@ Python notebooks without compomises.
 * Plays nicely with Git 
 
 
+<img src="output.gif">
+
 ## Quick start
 
 Install:
