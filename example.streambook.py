@@ -91,7 +91,7 @@ with __st.echo():
 	    return xs, ys, zs
 	xs, ys, zs = calc_curve(dt, num_steps)
 with __st.echo():
-	# Plot
+	# Plot file
 	fig = plt.figure(figsize=(12, 4))
 	ax = fig.add_subplot(projection='3d')
 	ax.plot(xs, ys, zs, lw=0.5)
