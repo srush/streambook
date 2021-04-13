@@ -1,10 +1,11 @@
   on: [push, pull_request]
   jobs:
     build:
-      runs-on: macos-latest
+      runs-on: ${{ matrix.os }}
       strategy:
         matrix:
-          python-version: [3.6]
+          os: [macos-latest, ubuntu-latest]
+          python-version: [3.5, 3.6, 3.8]
 
       steps:
         - uses: actions/checkout@v2
@@ -20,6 +21,6 @@
         - name: Test package install
           run: pip install .
 
-       
+
 
 
