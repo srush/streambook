@@ -20,9 +20,6 @@
         - name: Test package install
           run: pip install .
 
-        - name: Test that example is autosaved
-          run:  |
-           if [ -f example.streambook.py ]; then rm example.streambook.py;fi
-           python -m streambook example.py && cat example.streambook.py | head
+       
 
 
