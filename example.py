@@ -44,6 +44,11 @@ df.plot(ax=axs)
 fig
 
 
+x = "hello"
+# Printing
+print("Printing", x)
+"Output", x
+
 
 # ## Advanced Features
 
@@ -113,7 +118,7 @@ def calc_curve(dt, num_steps):
     return xs, ys, zs
 xs, ys, zs = calc_curve(dt, num_steps)
 
-# Plot
+# Plot file
 fig = plt.figure(figsize=(12, 4))
 ax = fig.add_subplot(projection='3d')
 ax.plot(xs, ys, zs, lw=0.5)

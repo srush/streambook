@@ -13,12 +13,14 @@ generator = Generator()
 
 class MyHandler(FileSystemEventHandler):
     def on_modified(self, event):
-        with in_place.InPlace(stream_file) as out:
-            generator.generate(abs_path, out)
-        with open(notebook_file, "w") as out:
-            for l in open(abs_path, "r"):
-                if "__st" not in l:
-                    out.write(l)
+        if event is None or event.src_path == abs_path:
+            print(f"Regenerating from {abs_path}...")
+            with in_place.InPlace(stream_file) as out:
+                generator.generate(abs_path, out)
+            with open(notebook_file, "w") as out:
+                for l in open(abs_path, "r"):
+                    if "__st" not in l:
+                        out.write(l)
 
 if __name__ == "__main__":
     import argparse, os
@@ -28,6 +30,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     abs_path = args.file
+    directory = os.path.dirname(abs_path)
     event_handler = MyHandler()
     observer = Observer()
 
@@ -37,8 +40,8 @@ if __name__ == "__main__":
     open(stream_file, "w").close()
     print("Streambook Daemon\n")
     
-    print("Watching file for changes:")
-    print(f"\n {abs_path}")
+    print("Watching directory for changes:")
+    print(f"\n {directory}")
     print()
     print("View Command")
     print(f"streamlit run  --server.runOnSave true {stream_file}")
@@ -46,9 +49,17 @@ if __name__ == "__main__":
     print("Notebook Execution Command")
     print(f"jupytext --to notebook --execute {notebook_file}")
     event_handler.on_modified(None)
-    observer.schedule(event_handler, path=abs_path, recursive=False)
+    observer.schedule(event_handler, path=directory, recursive=False)
     observer.start()
 
+
+    print()
+    print("Starting Streamlit")
+    import sys
+    from streamlit import cli as stcli
+    sys.argv = ["streamlit", "run", "--server.runOnSave", "true", stream_file]
+    stcli.main()
+    
     try:
         while True:
             time.sleep(1)
