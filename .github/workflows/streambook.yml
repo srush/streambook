@@ -23,7 +23,7 @@
         - name: Lint with flake8
           run: |
             # stop the build if there are Python syntax errors or undefined names
-            flake8 --ignore "N801, E203, E266, E501, W503, F812, E741, N803, N802, N806" torch_struct/ tests/
+            flake8 --ignore "N801, E203, E266, E501, W503, F812, E741, N803, N802, N806" streambook/ tests/
         - name: Test with pytest
           run: |
             pytest tests/
