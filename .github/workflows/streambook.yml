@@ -34,7 +34,6 @@
             cmp example.streambook.py tests/example.streambook.tmp
             python example.streambook.py
             python example.notebook.py
-            jupytext --to notebook --execute example.notebook.py
           
 
 
