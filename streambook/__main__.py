@@ -28,6 +28,7 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Stream book options.")
     parser.add_argument("file", help="file to run", type=os.path.abspath)
+    parser.add_argument("--nowatch", help="only process the file", action="store_true")
 
     args = parser.parse_args()
     abs_path = args.file
@@ -50,20 +51,22 @@ if __name__ == "__main__":
     print("Notebook Execution Command")
     print(f"jupytext --to notebook --execute {notebook_file}")
     event_handler.on_modified(None)
-    observer.schedule(event_handler, path=directory, recursive=False)
-    observer.start()
 
-    print()
-    print("Starting Streamlit")
-    import sys
-    from streamlit import cli as stcli
+    if not args.nowatch:
+        observer.schedule(event_handler, path=directory, recursive=False)
+        observer.start()
 
-    sys.argv = ["streamlit", "run", "--server.runOnSave", "true", stream_file]
-    stcli.main()
+        print()
+        print("Starting Streamlit")
+        import sys
+        from streamlit import cli as stcli
 
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+        sys.argv = ["streamlit", "run", "--server.runOnSave", "true", stream_file]
+        stcli.main()
+
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            observer.stop()
+        observer.join()

@@ -27,7 +27,15 @@
         - name: Test with pytest
           run: |
             pytest tests/
-
+        - name: Run command line
+          run: |
+            if [ -f requirements.dev.txt ]; then pip install -r requirements.example.txt; fi
+            python -m streambook --nowatch example.py
+            cmp example.streambook.py tests/example.streambook.tmp
+            python example.streambook.py
+            python example.notebook.py
+            jupytext --to notebook --execute example.notebook.py
+          
 
 
 
