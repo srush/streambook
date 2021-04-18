@@ -3,5 +3,3 @@ jupytext
 watchdog
 in_place
 mistune
-pandas
-matplotlib
