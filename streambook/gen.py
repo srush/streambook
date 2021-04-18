@@ -32,7 +32,7 @@ class Generate:
 
     def code(self, source):
         wrapper = textwrap.TextWrapper(
-            initial_indent="\t", subsequent_indent="\t", width=5000
+            initial_indent="    ", subsequent_indent="    ", width=5000
         )
         if not source.strip():
             return
