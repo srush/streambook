@@ -15,7 +15,7 @@ Install:
 ```bash
 git clone https://github.com/srush/streambook
 cd streambook
-pip install -r requirements.txt; pip install .
+pip install -r requirements.txt -r requirements.example.txt; pip install .
 ```
 
 Run streambook on example notebook:

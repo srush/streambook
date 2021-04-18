@@ -39,6 +39,7 @@ def st_stderr(dst):
     with st_redirect(sys.stderr, dst):
         yield
 
+
 class Header:
     tag: str = ""
 
@@ -108,7 +109,7 @@ class TOC:
         self._headers.append(header)
 
 
-class TOC_Sidebar(TOC):
+class TOCSidebar(TOC):
     def __init__(self):
         self._headers = []
         self._placeholder = st.sidebar.empty()
