@@ -1,4 +1,3 @@
-import os
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -18,12 +17,14 @@ class MyHandler(FileSystemEventHandler):
             with in_place.InPlace(stream_file) as out:
                 generator.generate(abs_path, out)
             with open(notebook_file, "w") as out:
-                for l in open(abs_path, "r"):
-                    if "__st" not in l:
-                        out.write(l)
+                for line in open(abs_path, "r"):
+                    if "__st" not in line:
+                        out.write(line)
+
 
 if __name__ == "__main__":
-    import argparse, os
+    import argparse
+    import os
 
     parser = argparse.ArgumentParser(description="Stream book options.")
     parser.add_argument("file", help="file to run", type=os.path.abspath)
@@ -39,7 +40,7 @@ if __name__ == "__main__":
 
     open(stream_file, "w").close()
     print("Streambook Daemon\n")
-    
+
     print("Watching directory for changes:")
     print(f"\n {directory}")
     print()
@@ -52,14 +53,14 @@ if __name__ == "__main__":
     observer.schedule(event_handler, path=directory, recursive=False)
     observer.start()
 
-
     print()
     print("Starting Streamlit")
     import sys
     from streamlit import cli as stcli
+
     sys.argv = ["streamlit", "run", "--server.runOnSave", "true", stream_file]
     stcli.main()
-    
+
     try:
         while True:
             time.sleep(1)

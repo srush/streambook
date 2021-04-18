@@ -23,8 +23,8 @@ class Generate:
         self.out_stream = out_stream
         self.all_markdown = ""
 
-    def gen(self, l):
-        print(l, file=self.out_stream)
+    def gen(self, output):
+        print(output, file=self.out_stream)
 
     def markdown(self, source):
         self.all_markdown += source + "\n"
@@ -37,14 +37,14 @@ class Generate:
         if not source.strip():
             return
         self.gen("with __st.echo(), streambook.st_stdout('info'):")
-        for l in source.splitlines():
-            self.gen(wrapper.fill(l))
+        for line in source.splitlines():
+            self.gen(wrapper.fill(line))
 
 
 header = """
 import streamlit as __st
 import streambook
-__toc = streambook.TOC_Sidebar()"""
+__toc = streambook.TOCSidebar()"""
 
 footer = """
 __toc.generate()"""
@@ -68,7 +68,9 @@ class Generator:
 
 
 if __name__ == "__main__":
-    import argparse, os, sys
+    import argparse
+    import os
+    import sys
 
     parser = argparse.ArgumentParser(description="Stream book options.")
     parser.add_argument("file", help="file to run", type=os.path.abspath)
