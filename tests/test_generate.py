@@ -1,6 +1,7 @@
 import streambook
 from io import StringIO
 
+
 def test_gen():
     output = StringIO()
     gen = streambook.Generate(output)
