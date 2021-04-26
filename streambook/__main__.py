@@ -1,3 +1,4 @@
+import subprocess
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
@@ -29,6 +30,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Stream book options.")
     parser.add_argument("file", help="file to run", type=os.path.abspath)
     parser.add_argument("--nowatch", help="only process the file", action="store_true")
+    parser.add_argument("--nostreamlit", help="does not launch streamlit (no effect if already --nowatch)", action="store_true")
 
     args = parser.parse_args()
     abs_path = args.file
@@ -56,13 +58,10 @@ if __name__ == "__main__":
         observer.schedule(event_handler, path=directory, recursive=False)
         observer.start()
 
-        print()
-        print("Starting Streamlit")
-        import sys
-        from streamlit import cli as stcli
-
-        sys.argv = ["streamlit", "run", "--server.runOnSave", "true", stream_file]
-        stcli.main()
+        if not args.nostreamlit:
+            print()
+            print("Starting Streamlit")
+            subprocess.run(["streamlit", "run", "--server.runOnSave", "true", stream_file], capture_output=True)
 
         try:
             while True:
