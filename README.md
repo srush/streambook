@@ -2,7 +2,7 @@
 
 Python notebooks without compromises. 
 
-<img src="output.gif">
+<img src="https://github.com/srush/streambook/blob/main/output.gif">
 
 * Write your code in any editor (emacs, vi, vscode)
 * Use standard tools (git, black, lint, pytest)
@@ -13,12 +13,10 @@ Python notebooks without compromises.
 Install:
 
 ```bash
-git clone https://github.com/srush/streambook
-cd streambook
-pip install -r requirements.txt -r requirements.example.txt; pip install .
+pip install streambook
 ```
 
-Run streambook on example notebook:
+Run streambook on a Python file. For the example notebook included:
 
 ```bash
 python -m streambook example.py
