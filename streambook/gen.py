@@ -28,7 +28,7 @@ class Generate:
 
     def markdown(self, source):
         self.all_markdown += source + "\n"
-        self.gen('__st.markdown("""%s""")' % source)
+        self.gen('__st.markdown(r"""%s""")' % source)
 
     def code(self, source):
         wrapper = textwrap.TextWrapper(
