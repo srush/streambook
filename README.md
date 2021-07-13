@@ -19,10 +19,11 @@ pip install streambook
 Run streambook on a Python file. For the example notebook included:
 
 ```bash
+pip install matplotlib
 python -m streambook example.py
 ```
 
-The output should look like this [streambook](https://share.streamlit.io/srush/streambook/main/example.streambook.py).
+The output should look like this [streambook](https://share.streamlit.io/srush/streambook-example/main/example.streambook.py).
 
 Editing your file `example.py` should automatically update the viewer.
 
