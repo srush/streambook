@@ -8,19 +8,17 @@ setup(
     author="Alexander Rush",
     author_email="arush@cornell.edu",
     version="0.1.2",
-    packages=[
-        "streambook"
-    ],
+    packages=["streambook"],
     long_description=long_description,
     long_description_content_type="text/markdown",
     package_data={"streambook": []},
     setup_requires=["pytest-runner"],
-    install_requires=["streamlit",
-                      "jupytext",
-                      "watchdog",
-                      "in_place",
-                      "mistune"],
+    install_requires=["streamlit", "jupytext", "watchdog", "in_place", "mistune"],
     tests_require=["pytest"],
-        python_requires='>=3.6',
-
+    python_requires=">=3.6",
+    entry_points={
+        "console_scripts": [
+            "streambook = streambook.cli:app",
+        ],
+    },
 )
