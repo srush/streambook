@@ -2,30 +2,30 @@
 import streamlit as __st
 import streambook
 __toc = streambook.TOCSidebar()
-__st.markdown(r"""# Streambook example""")
+__st.markdown(r"""# Streambook example""", unsafe_allow_html=True)
 __st.markdown(r"""Streambook is a setup for writing live-updating notebooks
-in any editor that you might want to use (emacs, vi, notepad).""")
+in any editor that you might want to use (emacs, vi, notepad).""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     import numpy as np
     import pandas as pd
     import matplotlib.pyplot as plt
     import time
-__st.markdown(r"""## Main Code""")
+__st.markdown(r"""## Main Code""", unsafe_allow_html=True)
 __st.markdown(r"""Notebook cells are separated by spaces. Comment cells are rendered
 as markdown.
 
-See https://jupytext.readthedocs.io/en/latest/formats.html#the-light-format""")
+See https://jupytext.readthedocs.io/en/latest/formats.html#the-light-format""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     x = np.array([10, 20, 30])
 __st.markdown(r"""Cells that end with an explicit variables are printed. 
 
-See https://docs.streamlit.io/en/stable/api.html#magic-commands""")
+See https://docs.streamlit.io/en/stable/api.html#magic-commands""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     x
-__st.markdown(r"""Dictionaries are pretty-printed using streamlit and can be collapsed""")
+__st.markdown(r"""Dictionaries are pretty-printed using streamlit and can be collapsed""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     data = [dict(key1 = i, key2=f"{i}", key3=100 -i) for i in range(100)]
-__st.markdown(r"""Pandas dataframe also show up in tables. """)
+__st.markdown(r"""Pandas dataframe also show up in tables. """, unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     df = pd.DataFrame(data)
     df
@@ -38,16 +38,16 @@ with __st.echo(), streambook.st_stdout('info'):
     # Printing
     print("Printing", x)
     "Output", x
-__st.markdown(r"""## Advanced Features""")
+__st.markdown(r"""## Advanced Features""", unsafe_allow_html=True)
 __st.markdown(r"""By default, the notebook is rerun on save to ensure
-consistency.""")
+consistency.""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     def simple_function(x):
         return x + 10
     y = simple_function(10)
     y
 __st.markdown(r"""Slower functions such as functions are loading data
-can be cached during development.""")
+can be cached during development.""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     @__st.cache()
     def slow_function():
@@ -56,9 +56,9 @@ with __st.echo(), streambook.st_stdout('info'):
         return None
     slow_function()
 __st.markdown(r"""This uses streamlit caching behind the scenes. It will
-run if the arguments or the body of the function change.""")
-__st.markdown(r"""See https://docs.streamlit.io/en/stable/caching.html""")
-__st.markdown(r"""## Longer example""")
+run if the arguments or the body of the function change.""", unsafe_allow_html=True)
+__st.markdown(r"""See https://docs.streamlit.io/en/stable/caching.html""", unsafe_allow_html=True)
+__st.markdown(r"""## Longer example""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     def lorenz(x, y, z, s=10, r=28, b=2.667):
         """
@@ -105,14 +105,14 @@ with __st.echo(), streambook.st_stdout('info'):
     ax.set_zlabel("Z Axis")
     ax.set_title("Lorenz Attractor")
     fig
-__st.markdown(r"""## Exporting to Jupyter""")
+__st.markdown(r"""## Exporting to Jupyter""", unsafe_allow_html=True)
 __st.markdown(r"""The whole notebook can also be exported as a
-Jupyter notebook.""")
+Jupyter notebook.""", unsafe_allow_html=True)
 __st.markdown(r"""The command is:
 
-`jupytext --to notebook --execute example.notebook.py`""")
+`jupytext --to notebook --execute example.notebook.py`""", unsafe_allow_html=True)
 __st.markdown(r"""Some commands are slightly different in streamlit that jupyter.
-You can include both and all `__st` lines will be stripped out.""")
+You can include both and all `__st` lines will be stripped out.""", unsafe_allow_html=True)
 with __st.echo(), streambook.st_stdout('info'):
     # Jupyter command
     from IPython.display import HTML

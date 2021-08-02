@@ -6,7 +6,7 @@ def test_markdown():
     output = StringIO()
     gen = streambook.Generate(output)
     gen.markdown("test")
-    assert output.getvalue() == '__st.markdown(r"""test""")\n'
+    assert output.getvalue() == '__st.markdown(r"""test""", unsafe_allow_html=True)\n'
 
 
 def test_gen():
