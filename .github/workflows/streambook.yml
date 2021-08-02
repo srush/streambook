@@ -30,7 +30,7 @@
         - name: Run command line
           run: |
             if [ -f requirements.dev.txt ]; then pip install -r requirements.example.txt; fi
-            python -m streambook --nowatch example.py
+            streambook export example.py
             cmp example.streambook.py tests/example.streambook.tmp
             python example.streambook.py
             python example.notebook.py
