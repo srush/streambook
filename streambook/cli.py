@@ -1,10 +1,7 @@
-import argparse
-import os
 import subprocess
 import time
 from pathlib import Path
 
-import click
 import in_place
 import typer
 from watchdog.events import FileSystemEventHandler
