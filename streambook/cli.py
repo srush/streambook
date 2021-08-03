@@ -53,7 +53,12 @@ def file_paths(file: Path):
 
 
 def main(
-    file: Path, watch: bool, streamlit: bool, quiet: bool, port: int, sections: str
+    file: Path,
+    watch: bool,
+    streamlit: bool,
+    quiet: bool,
+    port: Optional[int] = None,
+    sections: Optional[str] = None,
 ):
     abs_path, directory, stream_file, notebook_file, ipynb_file = file_paths(file)
     event_handler = MyHandler(
