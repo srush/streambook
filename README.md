@@ -20,7 +20,7 @@ Run streambook on a Python file. For the example notebook included:
 
 ```bash
 pip install matplotlib
-python -m streambook example.py
+streambook run example.py
 ```
 
 The output should look like this [streambook](https://share.streamlit.io/srush/streambook-example/main/example.streambook.py).
@@ -30,7 +30,7 @@ Editing your file `example.py` should automatically update the viewer.
 When you are done and ready to export to a notebook run:
 
 ```bash
-jupytext --to notebook --execute example.notebook.py
+streambook convert example.py
 ```
 
 This produces a standard [notebook](https://nbviewer.jupyter.org/github/srush/streambook/blob/main/example.notebook.ipynb).
@@ -54,10 +54,21 @@ A "benefit" of using notebooks is being able to keep data cached in memory,
 at the cost of often forgetting how it was created and in what order. 
 
 Streambook instead reruns your notebook from the top whenever the file is changed. 
-This can be very slow, particularly for users used to standard notebooks.
+Typically this is pretty fast for writing demos or quick notebooks.
 
-In order to circumvent this issue, the user needs to write functions and add caching. 
-Luckily Streamlit's caching API to makes it pretty easy in most use case. See 
+
+However this can be very slow for long running ML applications, particularly for users used to standard notebooks.
+In order to circumvent this issue there are two tricks.
+
+1) You can divide your notebook us into sections. This allows you to edit individual parts of the notebook.
+
+```
+streambook run --section "Main" example.py
+```
+
+2) You can write functions and add caching.
+
+Streamlit's caching API to makes it pretty easy in most use case. See 
 https://docs.streamlit.io/en/stable/caching.html for docs. 
 
 An example is given in the [notebook](https://nbviewer.jupyter.org/github/srush/streambook/blob/main/example.notebook.ipynb).

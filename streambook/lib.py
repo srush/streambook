@@ -5,6 +5,8 @@ from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
 from threading import current_thread
 import sys
 
+st.set_option("deprecation.showPyplotGlobalUse", False)
+
 
 @contextmanager
 def st_redirect(src, dst):
@@ -16,7 +18,7 @@ def st_redirect(src, dst):
 
         def new_write(b):
             if getattr(current_thread(), REPORT_CONTEXT_ATTR_NAME, None):
-                buffer.write(b)
+                buffer.write(b.replace("\n", "\n\n"))
                 output_func(buffer.getvalue())
             else:
                 old_write(b)
@@ -62,7 +64,7 @@ class Header:
         """Make markdown item for TOC listing. Example:
         '  - <a href='#abc'>Abc</a>'
         """
-        return f"{self.spaces}- [{self.text}](#{self.id})"
+        return f"{self.spaces}- <a href='#{self.text}'>{self.text}</a>"
 
     @property
     def spaces(self):
@@ -105,7 +107,6 @@ class TOC:
         self._placeholder.markdown(text, unsafe_allow_html=True)
 
     def _add(self, header):
-        # st.markdown(header.anchor, unsafe_allow_html=True)
         self._headers.append(header)
 
 
