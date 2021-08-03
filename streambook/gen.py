@@ -42,9 +42,12 @@ class Generate:
         if self.section_filter is not None and self.current_section[1] is not None:
             if not re.search(self.section_filter, self.current_section[1]):
                 return
-        self.gen(
-            '__st.markdown(r"""%s\n%s""", unsafe_allow_html=True)' % (head, source)
-        )
+        if head:
+            self.gen(
+                '__st.markdown(r"""%s\n%s""", unsafe_allow_html=True)' % (head, source)
+            )
+        else:
+            self.gen('__st.markdown(r"""%s""", unsafe_allow_html=True)' % (source))
 
     def code(self, source):
         if self.section_filter is not None and self.current_section[1] is not None:

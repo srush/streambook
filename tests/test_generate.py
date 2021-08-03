@@ -30,3 +30,11 @@ def test_example():
     generated_output = output.getvalue()
     expected_output = open("tests/example.streambook.tmp", "r").read()
     assert generated_output == expected_output
+
+
+def test_example_main():
+    output = StringIO()
+    streambook.Generator(section_filter="Main").generate("example.py", output)
+    generated_output = output.getvalue()
+    expected_output = open("tests/example.streambook.main.tmp", "r").read()
+    assert generated_output == expected_output
