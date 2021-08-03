@@ -2,6 +2,7 @@ import jupytext
 import textwrap
 import mistune
 import re
+import io
 
 
 class Collect(mistune.Renderer):
@@ -66,7 +67,6 @@ __toc = streambook.TOCSidebar()"""
 
 footer = """
 __toc.generate()"""
-import io
 
 
 class Generator:
