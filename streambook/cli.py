@@ -1,6 +1,7 @@
 import subprocess
 import time
 from pathlib import Path
+import os
 
 import in_place
 import typer
@@ -40,30 +41,35 @@ class MyHandler(FileSystemEventHandler):
                         out.write(line)
 
 
-def main(
-    file: Path,
-    watch: bool,
-    streamlit: bool,
-    quiet: bool,
-):
-
+def file_paths(file: Path):
     abs_path = file.resolve()
     directory = str(abs_path.parent)
     abs_path = str(abs_path)
 
+    ipynb_file = abs_path[:-3] + ".ipynb"
     stream_file = abs_path[:-3] + ".streambook.py"
     notebook_file = abs_path[:-3] + ".notebook.py"
+    return abs_path, directory, stream_file, notebook_file, ipynb_file
 
+
+def main(
+    file: Path, watch: bool, streamlit: bool, quiet: bool, port: int, sections: str
+):
+    abs_path, directory, stream_file, notebook_file, ipynb_file = file_paths(file)
     event_handler = MyHandler(
         abs_path=abs_path,
         stream_file=stream_file,
         notebook_file=notebook_file,
-        generator=Generator(),
+        generator=Generator(sections),
         quiet=quiet,
     )
     observer = Observer()
     open(stream_file, "w").close()
 
+    view_command = ["streamlit", "run", "--server.runOnSave", "true"]
+    if port is not None:
+        view_command += ["--server.port", str(port)]
+    view_command += [stream_file]
     if not quiet:
         if watch:
             print("Streambook Daemon\n")
@@ -72,11 +78,8 @@ def main(
             print()
 
             print("View Command")
-            print(f"streamlit run  --server.runOnSave true {stream_file}")
+            print(" ".join(view_command))
             print()
-
-        print("Notebook Execution Command")
-        print(f"jupytext --to notebook --execute {notebook_file}")
 
     event_handler.on_modified(None)
 
@@ -88,8 +91,7 @@ def main(
             print()
             print("Starting Streamlit")
             subprocess.run(
-                ["streamlit", "run", "--server.runOnSave", "true", stream_file],
-                capture_output=True,
+                view_command, capture_output=True,
             )
 
         try:
@@ -101,15 +103,26 @@ def main(
 
 
 @app.command()
+def convert(file: Path = typer.Argument(..., help="file to convert")):
+    abs_path, directory, stream_file, notebook_file, ipynb_file = file_paths(file)
+    command = f"jupytext --to notebook --execute {notebook_file} -o {ipynb_file} "
+    os.system(command)
+
+
+@app.command()
 def run(
     file: Path = typer.Argument(..., help="file to run"),
     streamlit: bool = typer.Option(True, help="Lauches streamlit"),
     quiet: bool = typer.Option(False, help="Don't print anything"),
+    port: int = typer.Option(None, help="Port to launch streamlit on."),
+    sections: str = typer.Option(None, help="Regex to filter sections."),
 ):
     """
     Starts the watcher and streamlit services.
     """
-    main(file, watch=True, streamlit=streamlit, quiet=quiet)
+    main(
+        file, watch=True, streamlit=streamlit, quiet=quiet, port=port, sections=sections
+    )
 
 
 @app.command()

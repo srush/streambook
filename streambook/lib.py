@@ -62,7 +62,7 @@ class Header:
         """Make markdown item for TOC listing. Example:
         '  - <a href='#abc'>Abc</a>'
         """
-        return f"{self.spaces}- [{self.text}](#{self.id})"
+        return f"{self.spaces}- <a href='#{self.text}'>{self.text}</a>"
 
     @property
     def spaces(self):
@@ -105,7 +105,6 @@ class TOC:
         self._placeholder.markdown(text, unsafe_allow_html=True)
 
     def _add(self, header):
-        # st.markdown(header.anchor, unsafe_allow_html=True)
         self._headers.append(header)
 
 
