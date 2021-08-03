@@ -52,4 +52,95 @@ with __st.echo(), streambook.st_stdout('info'):
     print("Printing", x)
     print("Printing2", x)
     "Output", x
+__st.markdown(r"""<span id='Advanced Features'> </span>
+## Advanced Features""", unsafe_allow_html=True)
+__st.markdown(r"""
+By default, the notebook is rerun on save to ensure
+consistency.""", unsafe_allow_html=True)
+with __st.echo(), streambook.st_stdout('info'):
+    def simple_function(x):
+        return x + 10
+    y = simple_function(10)
+    y
+__st.markdown(r"""
+Slower functions such as functions are loading data
+can be cached during development.""", unsafe_allow_html=True)
+with __st.echo(), streambook.st_stdout('info'):
+    @__st.cache()
+    def slow_function():
+        for i in range(10):
+            time.sleep(0.1)
+        return None
+    slow_function()
+__st.markdown(r"""
+This uses streamlit caching behind the scenes. It will
+run if the arguments or the body of the function change.""", unsafe_allow_html=True)
+__st.markdown(r"""
+See https://docs.streamlit.io/en/stable/caching.html""", unsafe_allow_html=True)
+__st.markdown(r"""<span id='Longer example'> </span>
+## Longer example""", unsafe_allow_html=True)
+with __st.echo(), streambook.st_stdout('info'):
+    def lorenz(x, y, z, s=10, r=28, b=2.667):
+        """
+        Given:
+           x, y, z: a point of interest in three dimensional space
+           s, r, b: parameters defining the lorenz attractor
+        Returns:
+           x_dot, y_dot, z_dot: values of the lorenz attractor's partial
+               derivatives at the point x, y, z
+        """
+        x_dot = s*(y - x)
+        y_dot = r*x - y - x*z
+        z_dot = x*y - b*z
+        return x_dot, y_dot, z_dot
+with __st.echo(), streambook.st_stdout('info'):
+    dt = 0.01
+    num_steps = 20000
+with __st.echo(), streambook.st_stdout('info'):
+    def calc_curve(dt, num_steps):
+        # Need one more for the initial values
+        xs = np.empty(num_steps + 1)
+        ys = np.empty(num_steps + 1)
+        zs = np.empty(num_steps + 1)
+
+        # Set initial values
+        xs[0], ys[0], zs[0] = (0., 1., 1.05)
+
+        # Step through "time", calculating the partial derivatives at the
+        # current point and using them to estimate the next point
+        for i in range(num_steps):
+            x_dot, y_dot, z_dot = lorenz(xs[i], ys[i], zs[i])
+            xs[i + 1] = xs[i] + (x_dot * dt)
+            ys[i + 1] = ys[i] + (y_dot * dt)
+            zs[i + 1] = zs[i] + (z_dot * dt)
+        return xs, ys, zs
+    xs, ys, zs = calc_curve(dt, num_steps)
+with __st.echo(), streambook.st_stdout('info'):
+    # Plot file
+    fig = plt.figure(figsize=(12, 4))
+    ax = fig.add_subplot(projection='3d')
+    ax.plot(xs, ys, zs, lw=0.5)
+    ax.set_xlabel("X Axis")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Z Axis")
+    ax.set_title("Lorenz Attractor")
+    fig
+__st.markdown(r"""<span id='Exporting to Jupyter'> </span>
+## Exporting to Jupyter""", unsafe_allow_html=True)
+__st.markdown(r"""
+The whole notebook can also be exported as a
+Jupyter notebook.""", unsafe_allow_html=True)
+__st.markdown(r"""
+The command is:
+
+`streambook convert example.py`""", unsafe_allow_html=True)
+__st.markdown(r"""
+Some commands are slightly different in streamlit that jupyter.
+You can include both and all `__st` lines will be stripped out.""", unsafe_allow_html=True)
+with __st.echo(), streambook.st_stdout('info'):
+    # Jupyter command
+    from IPython.display import HTML
+    HTML('<img src="example.gif">')
+    # Streamlit command
+    __st.image("example.gif")
 
