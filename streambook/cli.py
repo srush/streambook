@@ -57,8 +57,8 @@ def main(
     watch: bool,
     streamlit: bool,
     quiet: bool,
-    port: Optional[int] = None,
-    sections: Optional[str] = None,
+    port: int = None,
+    sections: str = None,
 ):
     abs_path, directory, stream_file, notebook_file, ipynb_file = file_paths(file)
     event_handler = MyHandler(
