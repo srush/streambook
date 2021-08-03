@@ -44,12 +44,12 @@ with __st.echo(), streambook.st_stdout('info'):
     df = pd.DataFrame(data)
     df
 with __st.echo(), streambook.st_stdout('info'):
-    fig, axs = plt.subplots(figsize=(12, 4))
-    df.plot(ax=axs)
-    fig
+    df.plot()
+    __st.pyplot()
 with __st.echo(), streambook.st_stdout('info'):
     x = "hello"
     # Printing
     print("Printing", x)
+    print("Printing2", x)
     "Output", x
 

@@ -5,6 +5,8 @@ from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
 from threading import current_thread
 import sys
 
+st.set_option("deprecation.showPyplotGlobalUse", False)
+
 
 @contextmanager
 def st_redirect(src, dst):
@@ -16,7 +18,7 @@ def st_redirect(src, dst):
 
         def new_write(b):
             if getattr(current_thread(), REPORT_CONTEXT_ATTR_NAME, None):
-                buffer.write(b)
+                buffer.write(b.replace("\n", "\n\n"))
                 output_func(buffer.getvalue())
             else:
                 old_write(b)

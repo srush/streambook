@@ -39,14 +39,15 @@ df = pd.DataFrame(data)
 df
 
 
-fig, axs = plt.subplots(figsize=(12, 4))
-df.plot(ax=axs)
-fig
+
+df.plot()
+__st.pyplot()
 
 
 x = "hello"
 # Printing
 print("Printing", x)
+print("Printing2", x)
 "Output", x
 
 
@@ -136,7 +137,7 @@ fig
 
 # The command is:
 #
-# `jupytext --to notebook --execute example.notebook.py`
+# `streambook convert example.py`
 
 # Some commands are slightly different in streamlit that jupyter.
 # You can include both and all `__st` lines will be stripped out.
