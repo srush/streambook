@@ -19,12 +19,14 @@ class MyHandler(FileSystemEventHandler):
         abs_path: str,
         stream_file: str,
         notebook_file: str,
+        jupytext_command: str,
         generator: Generator,
         quiet: bool,
     ):
         self.abs_path = abs_path
         self.stream_file = stream_file
         self.notebook_file = notebook_file
+        self.jupytext_command = jupytext_command
         self.generator = generator
         self.quiet = quiet
         super().__init__()
@@ -39,6 +41,8 @@ class MyHandler(FileSystemEventHandler):
                 for line in open(self.abs_path, "r"):
                     if "__st" not in line:
                         out.write(line)
+            if self.jupytext_command is not None:
+                os.system(self.jupytext_command)
 
 
 def file_paths(file: Path):
@@ -56,15 +60,18 @@ def main(
     file: Path,
     watch: bool,
     streamlit: bool,
+    jupyter: bool,
     quiet: bool,
     port: int = None,
     sections: str = None,
 ):
     abs_path, directory, stream_file, notebook_file, ipynb_file = file_paths(file)
+    jupytext_command = f"jupytext --to notebook --execute {notebook_file} -o {ipynb_file}"
     event_handler = MyHandler(
         abs_path=abs_path,
         stream_file=stream_file,
         notebook_file=notebook_file,
+        jupytext_command=jupytext_command if jupyter else None,
         generator=Generator(sections),
         quiet=quiet,
     )
@@ -75,6 +82,7 @@ def main(
     if port is not None:
         view_command += ["--server.port", str(port)]
     view_command += [stream_file]
+
     if not quiet:
         if watch:
             print("Streambook Daemon\n")
@@ -85,7 +93,10 @@ def main(
             print("View Command")
             print(" ".join(view_command))
             print()
-
+        if jupyter:
+            print("Jupyter Daemon\n")
+            print(jupytext_command)
+            
     event_handler.on_modified(None)
 
     if watch:
@@ -98,7 +109,7 @@ def main(
             subprocess.run(
                 view_command, capture_output=True,
             )
-
+        
         try:
             while True:
                 time.sleep(1)
@@ -118,6 +129,7 @@ def convert(file: Path = typer.Argument(..., help="file to convert")):
 def run(
     file: Path = typer.Argument(..., help="file to run"),
     streamlit: bool = typer.Option(True, help="Lauches streamlit"),
+    jupyter: bool = typer.Option(True, help="Compiles ipynb file"),
     quiet: bool = typer.Option(False, help="Don't print anything"),
     port: int = typer.Option(None, help="Port to launch streamlit on."),
     sections: str = typer.Option(None, help="Regex to filter sections."),
@@ -126,7 +138,7 @@ def run(
     Starts the watcher and streamlit services.
     """
     main(
-        file, watch=True, streamlit=streamlit, quiet=quiet, port=port, sections=sections
+        file, watch=True, streamlit=streamlit, jupyter=jupyter, quiet=quiet, port=port, sections=sections
     )
 
 

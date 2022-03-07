@@ -1,5 +1,5 @@
-streamlit
+streamlit==1.3
 jupytext
 watchdog
 in_place
-mistune
+mistune==0.8.4
