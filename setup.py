@@ -7,7 +7,7 @@ setup(
     name="streambook",
     author="Alexander Rush",
     author_email="arush@cornell.edu",
-    version="0.2",
+    version="0.3",
     packages=["streambook"],
     long_description=long_description,
     long_description_content_type="text/markdown",
