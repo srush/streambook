@@ -60,8 +60,8 @@ def main(
     file: Path,
     watch: bool,
     streamlit: bool,
-    jupyter: bool,
     quiet: bool,
+    jupyter: bool = False,
     port: int = None,
     sections: str = None,
 ):
@@ -131,7 +131,7 @@ def convert(file: Path = typer.Argument(..., help="file to convert")):
 def run(
     file: Path = typer.Argument(..., help="file to run"),
     streamlit: bool = typer.Option(True, help="Lauches streamlit"),
-    jupyter: bool = typer.Option(True, help="Compiles ipynb file"),
+    jupyter: bool = typer.Option(False, help="Compiles ipynb file"),
     quiet: bool = typer.Option(False, help="Don't print anything"),
     port: int = typer.Option(None, help="Port to launch streamlit on."),
     sections: str = typer.Option(None, help="Regex to filter sections."),
