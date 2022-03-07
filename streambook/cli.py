@@ -66,7 +66,9 @@ def main(
     sections: str = None,
 ):
     abs_path, directory, stream_file, notebook_file, ipynb_file = file_paths(file)
-    jupytext_command = f"jupytext --to notebook --execute {notebook_file} -o {ipynb_file}"
+    jupytext_command = (
+        f"jupytext --to notebook --execute {notebook_file} -o {ipynb_file}"
+    )
     event_handler = MyHandler(
         abs_path=abs_path,
         stream_file=stream_file,
@@ -96,7 +98,7 @@ def main(
         if jupyter:
             print("Jupyter Daemon\n")
             print(jupytext_command)
-            
+
     event_handler.on_modified(None)
 
     if watch:
@@ -109,7 +111,7 @@ def main(
             subprocess.run(
                 view_command, capture_output=True,
             )
-        
+
         try:
             while True:
                 time.sleep(1)
@@ -138,7 +140,13 @@ def run(
     Starts the watcher and streamlit services.
     """
     main(
-        file, watch=True, streamlit=streamlit, jupyter=jupyter, quiet=quiet, port=port, sections=sections
+        file,
+        watch=True,
+        streamlit=streamlit,
+        jupyter=jupyter,
+        quiet=quiet,
+        port=port,
+        sections=sections,
     )
 
 
