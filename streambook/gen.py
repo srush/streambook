@@ -5,12 +5,12 @@ import re
 import io
 
 
-class Collect(mistune.Renderer):
+class Collect(mistune.HTMLRenderer):
     def __init__(self):
         super().__init__()
         self.headers = []
 
-    def header(self, text, level, raw=None):
+    def heading(self, text, level):
         self.headers.append((text, level - 1))
         return ""
 

@@ -72,3 +72,19 @@ Streamlit's caching API to makes it pretty easy in most use case. See
 https://docs.streamlit.io/en/stable/caching.html for docs. 
 
 An example is given in the [notebook](https://nbviewer.jupyter.org/github/srush/streambook/blob/main/example.notebook.ipynb).
+
+## Development
+
+First, install the dev dependencies using `pip install -e .'[dev]'`.
+
+### Update runtime dependencies
+
+```sh
+pip-compile --generate-hashes --allow-unsafe --upgrade -q
+```
+
+### Update dev dependencies
+
+```sh
+pip-compile --extra dev --generate-hashes --allow-unsafe --output-file requirements.dev.txt --upgrade -q
+```

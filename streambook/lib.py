@@ -1,9 +1,9 @@
-import streamlit as st
+import sys
 from contextlib import contextmanager
 from io import StringIO
-from streamlit.report_thread import REPORT_CONTEXT_ATTR_NAME
 from threading import current_thread
-import sys
+
+import streamlit as st
 
 st.set_option("deprecation.showPyplotGlobalUse", False)
 
@@ -17,7 +17,7 @@ def st_redirect(src, dst):
         old_write = src.write
 
         def new_write(b):
-            if getattr(current_thread(), REPORT_CONTEXT_ATTR_NAME, None):
+            if st.runtime.scriptrunner.get_script_run_ctx():
                 buffer.write(b.replace("\n", "\n\n"))
                 output_func(buffer.getvalue())
             else:
